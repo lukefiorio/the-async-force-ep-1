@@ -44,16 +44,29 @@ function xmlListener3() {
 
   for (let i = 0; i < filmsArray.length; i++) {
     let film = document.createElement('li');
-    film.innerHTML = filmsArray[i].title;
+    film.className = 'film';
     filmList.appendChild(film);
+    let filmTitle = document.createElement('h2');
+    filmTitle.className = 'filmTitle';
+    filmTitle.innerHTML = filmsArray[i].title;
+    film.appendChild(filmTitle);
+    let planets = document.createElement('h3');
+    planets.innerHTML = 'Planets';
+    film.appendChild(planets);
+    let filmPlanets = document.createElement('ul');
+    filmPlanets.className = 'filmPlanets';
+    film.appendChild(filmPlanets);
+
     let planetArray = filmsArray[i].planets;
 
     for (let j = 0; j < planetArray.length; j++) {
       function xmlPlanetListener() {
-        //console.log(JSON.parse(this.responseText).name);
-        let planet = document.createElement('ul');
-        planet.innerHTML = JSON.parse(this.responseText).name;
-        film.appendChild(planet);
+        let planet = document.createElement('li');
+        planet.className = 'planet';
+        filmPlanets.appendChild(planet);
+        let planetName = document.createElement('h4');
+        planetName.innerHTML = JSON.parse(this.responseText).name;
+        planet.appendChild(planetName);
       }
 
       let xmlPlanetReq = new XMLHttpRequest();
