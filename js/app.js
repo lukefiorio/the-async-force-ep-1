@@ -46,6 +46,21 @@ function xmlListener3() {
     let film = document.createElement('li');
     film.innerHTML = filmsArray[i].title;
     filmList.appendChild(film);
+    let planetArray = filmsArray[i].planets;
+
+    for (let j = 0; j < planetArray.length; j++) {
+      function xmlPlanetListener() {
+        //console.log(JSON.parse(this.responseText).name);
+        let planet = document.createElement('ul');
+        planet.innerHTML = JSON.parse(this.responseText).name;
+        film.appendChild(planet);
+      }
+
+      let xmlPlanetReq = new XMLHttpRequest();
+      xmlPlanetReq.addEventListener('load', xmlPlanetListener);
+      xmlPlanetReq.open('GET', JSON.parse(this.responseText).results[i].planets[j]);
+      xmlPlanetReq.send();
+    }
   }
 }
 
